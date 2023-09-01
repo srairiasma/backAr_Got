@@ -9,7 +9,18 @@ import jwt from 'jsonwebtoken';
 //const crypto = require ('crypto')
 const app = express.Router();
 
+app.get('/', async (req, res) => {
+  try {
+    // Use the User model to find all users in the database
+    const users = await User.find();
 
+    // Send the list of users as a JSON response
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 //****************login*******************
 app.post('/account/login', async (req, res) => {
