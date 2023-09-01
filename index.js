@@ -28,7 +28,7 @@ app.use(
 app.use(cors());
 
 // Database connection using an environment variable
-const mongodbUri = process.env.MONGODB_URI || "mongodb+srv://asmasrairi:56isr0D9O7p34eY0@cluster0.2bdnucf.mongodb.net/Ar_Got";
+const mongodbUri =  "mongodb+srv://asmasrairi:56isr0D9O7p34eY0@cluster0.2bdnucf.mongodb.net/Ar_Got";
 
 mongoose.connect(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
