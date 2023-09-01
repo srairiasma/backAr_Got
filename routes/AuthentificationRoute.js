@@ -1,5 +1,5 @@
 
-import mongoose from "mongoose"
+
 import express from "express"
 import bodyParser from "body-parser";
 import User from "../model/User.js"
@@ -10,18 +10,7 @@ import jwt from 'jsonwebtoken';
 const app = express.Router();
 
 
-app.get('/users', async (req, res) => {
-  try {
-    // Use the User model to find all users in the database
-    const users = await User.find();
 
-    // Send the list of users as a JSON response
-    res.status(200).json(users);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
 app.get('/', async (req, res) => {
   try {
    
