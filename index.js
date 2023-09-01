@@ -5,6 +5,7 @@ import bodyParser from "body-parser"
 import mongoose from "mongoose"
 import auth from "./routes/AuthentificationRoute.js" 
 import shopRoutes from './routes/shop.js';
+import User from "./model/User.js"
 
 //import shop from "./routes/ShopItem.js"
 const app = express()
@@ -34,7 +35,19 @@ app.use(session({
   }));
 
 app.use(auth)
-app.use('/', shopRoutes);
+app.use('/shop', shopRoutes);
+app.get('/users', async (req, res) => {
+    try {
+      // Use the User model to find all users in the database
+      const users = await User.find();
+  
+      // Send the list of users as a JSON response
+      res.status(200).json(users);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 
 app.listen(13756, () => {
