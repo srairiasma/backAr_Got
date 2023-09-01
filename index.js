@@ -20,7 +20,7 @@ mongoose.set('strictQuery', true);
 dotenv.config() ; 
 export const connect = async () => {
     try {
-    await mongoose.connect(process.env.MONGO);
+    await mongoose.connect("mongodb+srv://asmasrairi:56isr0D9O7p34eY0@cluster0.2bdnucf.mongodb.net/Ar_Got");
     
     } catch (error) {
         throw error
