@@ -29,6 +29,8 @@ router.post('/saveShopItems', authenticateToken, async (req, res) => {
       isPurchased: item.IsPurchased
     }));
 
+
+    
     await ShopItem.insertMany(itemsToSave);
     res.json({ message: 'Shop items saved successfully' });
   } catch (error) {
