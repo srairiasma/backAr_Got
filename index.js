@@ -41,18 +41,7 @@ app.use("/", auth);
 app.use("/shop", shopRoutes);
 
 // Define the /users route
-app.get("/users", async (req, res) => {
-  try {
-    // Use the User model to find all users in the database
-    const users = await User.find();
 
-    // Send the list of users as a JSON response
-    res.status(200).json(users);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
 
 const port = process.env.PORT || 3000;
 
