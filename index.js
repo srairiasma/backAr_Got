@@ -38,7 +38,7 @@ mongoose.connect(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true }
     console.error("Error connecting to MongoDB:", error);
   });
 
-app.use(auth);
+app.use("/",auth);
 app.use("/shop", shopRoutes);
 
 // Dynamically determine the port or use a default value
