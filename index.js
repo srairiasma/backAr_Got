@@ -34,7 +34,7 @@ app.use(session({
   }));
 
 app.use(auth)
-app.use('/shop', shopRoutes);
+app.use('/', shopRoutes);
 
 
 app.listen(13756, () => {
