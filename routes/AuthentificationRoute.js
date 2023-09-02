@@ -24,7 +24,7 @@ app.get("/users", async (_req, res) => {
 
 app.get('/', async (req, res) => {
   try {
-   
+
 
     // Send the list of users as a JSON response
     res.status(200).json("nhebbek asma");
@@ -65,17 +65,20 @@ app.post('/account/login', async (req, res) => {
 
 //*****************create account**************
 app.post('/account/create', async (req, res, next) => {
-  const newaccount = new User(req.body)
-  //req.session.userId = savedUser._id;
+  // Initialize Valarians and coins to 0 in the request body
+  req.body.Valarians = 0;
+  req.body.coins = 0;
+
+  const newaccount = new User(req.body);
+
   try {
-    const savedaccount = await newaccount.save()
-    res.status(200).json("user is created")
-
+    const savedaccount = await newaccount.save();
+    res.status(200).json("User is created");
   } catch (error) {
-    next(error)
+    next(error);
   }
-
 });
+
 app.post('/updatecoins/:userId', async (req, res) => {
   const userId = req.params.userId;
   const { coins } = req.body;
