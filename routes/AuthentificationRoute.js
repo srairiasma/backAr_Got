@@ -222,7 +222,29 @@ app.get("/getValarians/:userId", async (req, res) => {
   }
 });
 
+app.put("/updatecoins/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const { coins } = req.body;
 
+  try {
+    // Find the user by their user ID
+    const user = await User.findById(userId);
+
+    if (!user) {
+      res.status(404).send("User not found");
+      return;
+    }
+
+    // Update the user's coins
+    user.coins = coins;
+    await user.save();
+
+    res.status(200).send('Coins updated successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server error');
+  }
+});
 
 
 export default app;
