@@ -65,24 +65,37 @@ app.post('/account/login', async (req, res) => {
 
 //*****************create account**************
 app.post('/account/create', async (req, res, next) => {
-  req.body.Valarians = 0;
-  req.body.coins = 0;
+  // Check if the username already exists
+  const existingUser = await User.findOne({ username: req.body.username });
 
-  const newaccount = new User(req.body);
-
-  try {
-    const savedaccount = await newaccount.save();
-
-    // Instead of sending a simple string message, send a JSON response
-    res.status(200).json({
-      code: 0, // You can define your own status codes
-      msg: "User is created",
-      user: savedaccount // Include the user data in the response
+  if (existingUser) {
+    // If the username already exists, respond with an error
+    res.status(400).json({
+      code: 2, // Custom code for username already taken
+      msg: "Username is already taken"
     });
-  } catch (error) {
-    next(error);
+  } else {
+    // If the username is not taken, proceed with account creation
+    req.body.Valarians = 0;
+    req.body.coins = 0;
+
+    const newaccount = new User(req.body);
+
+    try {
+      const savedaccount = await newaccount.save();
+
+      // Respond with a success message and user data
+      res.status(200).json({
+        code: 0, // Custom code for success
+        msg: "User is created",
+        user: savedaccount
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 });
+
 
 
 app.post('/updatecoins/:userId', async (req, res) => {
