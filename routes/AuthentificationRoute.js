@@ -72,7 +72,8 @@ app.post('/account/create', async (req, res, next) => {
     // If the username already exists, respond with an error
     res.status(400).json({
       code: 2, // Custom code for username already taken
-      msg: "Username is already taken"
+      msg: "Username is already taken" ,
+      user: existingUser
     });
   } else {
     // If the username is not taken, proceed with account creation
