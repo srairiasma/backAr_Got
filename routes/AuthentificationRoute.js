@@ -27,7 +27,7 @@ app.get('/', async (req, res) => {
 
 
     // Send the list of users as a JSON response
-    res.status(200).json("test");
+    res.status(200).json("ala9al nefhem node");
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
