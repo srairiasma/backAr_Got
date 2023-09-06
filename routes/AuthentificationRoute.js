@@ -65,7 +65,6 @@ app.post('/account/login', async (req, res) => {
 
 //*****************create account**************
 app.post('/account/create', async (req, res, next) => {
-  // Initialize Valarians and coins to 0 in the request body
   req.body.Valarians = 0;
   req.body.coins = 0;
 
@@ -73,11 +72,18 @@ app.post('/account/create', async (req, res, next) => {
 
   try {
     const savedaccount = await newaccount.save();
-    res.status(200).json("User is created");
+
+    // Instead of sending a simple string message, send a JSON response
+    res.status(200).json({
+      code: 0, // You can define your own status codes
+      msg: "User is created",
+      user: savedaccount // Include the user data in the response
+    });
   } catch (error) {
     next(error);
   }
 });
+
 
 app.post('/updatecoins/:userId', async (req, res) => {
   const userId = req.params.userId;
